@@ -1,6 +1,7 @@
-org\game\Grid$1.class
 org\game\Grid.class
+org\game\Cell.class
+org\game\NeighbourHood.class
+org\game\Grid$1.class
 org\game\Key.class
-org\game\Grid$NeighbourHood.class
 org\game\CheckMovement.class
 org\game\KeyBoardInput.class

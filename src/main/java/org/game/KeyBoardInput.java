@@ -9,6 +9,7 @@ import java.io.IOException;
 public class KeyBoardInput {
     private Key keyBoardKey = Key.NONE;
     Terminal terminal;
+
     public KeyBoardInput() {
         try {
             terminal = TerminalBuilder.terminal();
@@ -16,13 +17,13 @@ public class KeyBoardInput {
             throw new RuntimeException(e);
         }
         new Thread(() -> {
-                while (true) {
-                    try {
-                        setKeyBoardKey(getKeys(terminal.reader().read()));
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+            while (true) {
+                try {
+                    setKeyBoardKey(getKeys(terminal.reader().read()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
+            }
         }).start();
     }
 
@@ -47,8 +48,6 @@ public class KeyBoardInput {
     }
 
     public void setKeyBoardKey(Key keyBoardKey) {
-
         this.keyBoardKey = keyBoardKey;
-
     }
 }
