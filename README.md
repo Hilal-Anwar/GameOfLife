@@ -18,5 +18,17 @@ There is no infinite number of cells in this game so any patter moving beyond th
 
 
 
-https://user-images.githubusercontent.com/50636048/193181220-e2ab2bf2-74e6-43eb-94d6-5df5ea957a4b.mp4
+https://user-images.githubusercontent.com/50636048/193699960-a0fb98f9-f26e-4d0d-9ea5-c005c9d9409e.mp4
+
+
+
+https://user-images.githubusercontent.com/50636048/193699975-f80ee544-5c16-4429-bdbb-fc00a3044be0.mp4
+
+
+
+https://user-images.githubusercontent.com/50636048/193699991-dd53bbc4-0f53-456f-9a49-95705cf27274.mp4
+
+
+
+https://user-images.githubusercontent.com/50636048/193700028-3d5d19ad-9943-4fc6-95d5-6a77132b98e0.mp4
 
