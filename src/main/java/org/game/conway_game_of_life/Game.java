@@ -1,32 +1,45 @@
-package org.game;
+package org.game.conway_game_of_life;
 
 
-import org.jline.utils.InfoCmp;
+import org.game.util.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
+import java.util.Random;
 
 
-public class Grid implements CheckMovement {
+public class Game implements CheckMovement {
     private final int column;
     private final int row;
     private final int[] m_box = new int[]{3, 5};
-    private final KeyBoardInput keyBoardInput = new KeyBoardInput();
     private final int size;
     private final boolean[][] dummy_grid;
     private final HashSet<Cell> memory = new HashSet<>();
     private final HashSet<Cell> dead_in_next_gen = new HashSet<>();
     private final HashSet<Cell> new_birth_in_next_gen = new HashSet<>();
+    private final String _color;
 
-    public Grid(int column, int row, int size) {
+    public Game(int column, int row, int size, Colors color) {
         this.column = column;
         this.row = row;
         this.size = size;
+        _color = Text.getColorText("██", color);
         dummy_grid = new boolean[row][column];
     }
-    void start() throws InterruptedException {
-        keyBoardInput.terminal.puts(InfoCmp.Capability.clear_screen);
-        Draw_Grid();
+
+    public Game(int column, int row, int size) {
+        this.column = column;
+        this.row = row;
+        this.size = size;
+        _color = Text.getColorText("██", Colors.values()[new Random().nextInt(Colors.values().length)]);
+        dummy_grid = new boolean[row][column];
+    }
+
+    public void start() throws InterruptedException {
+        var display = new Display();
+        KeyBoardInput keyBoardInput = new KeyBoardInput(display);
+        display.clear_display();
+        Draw_Grid_box();
         while (true) {
             var key = keyBoardInput.getKeyBoardKey();
             switch (key) {
@@ -43,18 +56,19 @@ public class Grid implements CheckMovement {
                     else memory.remove(k);
                 }
             }
-           if (!key.equals(Key.NONE)) {
-                keyBoardInput.terminal.puts(InfoCmp.Capability.clear_screen);
-                Draw_Grid();
+            if (!key.equals(Key.NONE)) {
+                display.clear_display();
+                Draw_Grid_box();
             }
             if (key.equals(Key.SPACE)) {
                 create_next_gen();
                 break;
             }
             keyBoardInput.setKeyBoardKey(Key.NONE);
-            Thread.sleep(50);
+            Thread.sleep(10);
 
         }
+        display.clear_display();
         String condition = "paused";
         while (!memory.isEmpty() || !new_birth_in_next_gen.isEmpty()) {
             Draw_Grid();
@@ -71,7 +85,7 @@ public class Grid implements CheckMovement {
             }
 
             Thread.sleep(90);
-            keyBoardInput.terminal.puts(InfoCmp.Capability.clear_screen);
+            display.clear_display();
         }
         System.exit(-1);
     }
@@ -124,21 +138,32 @@ public class Grid implements CheckMovement {
     }
 
 
-    public void Draw_Grid() {
+    private void Draw_Grid_box() {
+        String color_text = Text.getColorText("██", Colors.YELLOW);
         StringBuilder grid = new StringBuilder();
         for (int i = 0; i < row * size + 1; i++) {
             for (int j = 0; j < column * size + 1; j++)
                 if ((i % size == 0) || (j % size == 0) || (dummy_grid[i / size][j / size])) {
                     if (((j == m_box[0] * size || j == m_box[0] * size + size) &&
                             (i >= m_box[1] * size && i <= m_box[1] * size + size)))
-                        grid.append("\033[0;33m██\33[0m");
+                        grid.append(color_text);
                     else if (((i == m_box[1] * size || i == m_box[1] * size + size) &&
                             (j >= m_box[0] * size && j <= m_box[0] * size + size)))
-                        grid.append("\033[0;33m██\33[0m");
+                        grid.append(color_text);
                     else
                         grid.append("██");
                 } else
                     grid.append("  ");
+            grid.append('\n');
+        }
+        System.out.println(grid);
+    }
+
+    private void Draw_Grid() {
+        StringBuilder grid = new StringBuilder();
+        for (int i = 0; i < row * size; i++) {
+            for (int j = 0; j < column * size; j++)
+                grid.append(dummy_grid[i / (size)][j / (size)] ? _color : "  ");
             grid.append('\n');
         }
         System.out.println(grid);
@@ -182,11 +207,6 @@ public class Grid implements CheckMovement {
     @Override
     public Cell check_moveDiagonal_downLeft(int x, int y) {
         return new Cell(resolve_limit_of_x(x - 1), resolve_limit_of_y(y + 1));
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        var grid = new Grid(100, 50, 3);
-        grid.start();
     }
 
     int resolve_limit_of_x(int x) {

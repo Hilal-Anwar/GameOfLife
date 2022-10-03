@@ -1,24 +1,15 @@
-package org.game;
-
-import org.jline.terminal.Terminal;
-import org.jline.terminal.TerminalBuilder;
+package org.game.util;
 
 import java.io.IOException;
 
 public class KeyBoardInput {
     private Key keyBoardKey = Key.NONE;
-    Terminal terminal;
 
-    public KeyBoardInput() {
-        try {
-            terminal = TerminalBuilder.terminal();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public KeyBoardInput(Display display) {
         new Thread(() -> {
             while (true) {
                 try {
-                    setKeyBoardKey(getKeys(terminal.reader().read()));
+                    setKeyBoardKey(getKeys(display.terminal.reader().read()));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

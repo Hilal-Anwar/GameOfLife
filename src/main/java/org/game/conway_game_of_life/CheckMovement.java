@@ -1,6 +1,6 @@
-package org.game;
+package org.game.conway_game_of_life;
 
-public interface CheckMovement {
+interface CheckMovement {
      Cell check_moveUp(int x, int y);
      Cell check_moveDown(int x, int y);
      Cell check_moveLeft(int x, int y);

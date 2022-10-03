@@ -1,4 +1,4 @@
-package org.game;
+package org.game.conway_game_of_life;
 
 import java.util.HashSet;
 

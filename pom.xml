@@ -41,7 +41,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <!-- here we specify that we want to use the main method within the App class -->
-                            <mainClass>org.game.Grid</mainClass>
+                            <mainClass>org.game.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -53,7 +53,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.game.Grid</mainClass>
+                            <mainClass>org.game.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

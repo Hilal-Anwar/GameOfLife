@@ -1,4 +1,11 @@
-C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\Key.java
-C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\CheckMovement.java
-C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\Grid.java
-C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\KeyBoardInput.java
+C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\conway_game_of_life\Game.java
+C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\util\Colors.java
+C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\util\Key.java
+C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\conway_game_of_life\NeighbourHood.java
+C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\util\Text.java
+C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\util\KeyBoardInput.java
+C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\Main.java
+C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\util\Display.java
+C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\conway_game_of_life\CheckMovement.java
+C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\org\game\conway_game_of_life\Cell.java
+C:\Users\hilal\IdeaProjects\GameOfLife\src\main\java\module-info.java
