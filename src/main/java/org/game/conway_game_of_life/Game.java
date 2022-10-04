@@ -17,7 +17,7 @@ public class Game implements CheckMovement {
     private final HashSet<Cell> memory = new HashSet<>();
     private final HashSet<Cell> dead_in_next_gen = new HashSet<>();
     private final HashSet<Cell> new_birth_in_next_gen = new HashSet<>();
-    private final String _color;
+    private String _color;
 
     public Game(int column, int row, int size, Colors color) {
         this.column = column;
@@ -31,7 +31,7 @@ public class Game implements CheckMovement {
         this.column = column;
         this.row = row;
         this.size = size;
-        _color = Text.getColorText("██", Colors.values()[new Random().nextInt(Colors.values().length)]);
+        _color = Text.getColorText("██", Colors.values()[new Random().nextInt(8)]);
         dummy_grid = new boolean[row][column];
     }
 
@@ -163,7 +163,7 @@ public class Game implements CheckMovement {
         StringBuilder grid = new StringBuilder();
         for (int i = 0; i < row * size; i++) {
             for (int j = 0; j < column * size; j++)
-                grid.append(dummy_grid[i / (size)][j / (size)] ? _color : "  ");
+                grid.append(dummy_grid[i / (size)][j / (size)] ? _color: "  ");
             grid.append('\n');
         }
         System.out.println(grid);
