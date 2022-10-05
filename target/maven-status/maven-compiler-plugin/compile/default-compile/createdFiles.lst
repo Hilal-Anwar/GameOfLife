@@ -1,12 +1,14 @@
 org\game\util\Key.class
+org\game\util\KeyBoardInput.class
+org\game\util\Colors.class
+org\game\util\Display.class
 module-info.class
+org\game\conway_game_of_life\GridNature.class
+org\game\conway_game_of_life\GameMode.class
 org\game\conway_game_of_life\NeighbourHood.class
 org\game\util\Text.class
 org\game\conway_game_of_life\Game.class
-org\game\util\KeyBoardInput.class
 org\game\conway_game_of_life\CheckMovement.class
 org\game\Main.class
 org\game\conway_game_of_life\Game$1.class
-org\game\util\Colors.class
-org\game\util\Display.class
 org\game\conway_game_of_life\Cell.class

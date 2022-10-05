@@ -17,12 +17,15 @@ public class Game implements CheckMovement {
     private final HashSet<Cell> memory = new HashSet<>();
     private final HashSet<Cell> dead_in_next_gen = new HashSet<>();
     private final HashSet<Cell> new_birth_in_next_gen = new HashSet<>();
-    private String _color;
-
-    public Game(int column, int row, int size, Colors color) {
+    private final String _color;
+    private final GameMode game_Game_mode;
+    private final GridNature grid_nature;
+    public Game(int column, int row, int size, Colors color, GameMode game_Game_mode, GridNature grid_nature) {
         this.column = column;
         this.row = row;
         this.size = size;
+        this.grid_nature=grid_nature;
+        this.game_Game_mode = game_Game_mode;
         _color = Text.getColorText("██", color);
         dummy_grid = new boolean[row][column];
     }
@@ -31,6 +34,8 @@ public class Game implements CheckMovement {
         this.column = column;
         this.row = row;
         this.size = size;
+        grid_nature=GridNature.OPEN;
+        game_Game_mode = GameMode.GRID_FREE;
         _color = Text.getColorText("██", Colors.values()[new Random().nextInt(8)]);
         dummy_grid = new boolean[row][column];
     }
@@ -71,7 +76,11 @@ public class Game implements CheckMovement {
         display.clear_display();
         String condition = "paused";
         while (!memory.isEmpty() || !new_birth_in_next_gen.isEmpty()) {
-            Draw_Grid();
+            if ((game_Game_mode.equals(GameMode.GRID))) {
+                Draw_Grid_box();
+            } else {
+                Draw_Grid();
+            }
             var key = keyBoardInput.getKeyBoardKey();
             switch (key) {
                 case ESC -> System.exit(-1);
@@ -124,9 +133,9 @@ public class Game implements CheckMovement {
             try {
                 var result = function.invoke(this, x, y);
                 if (result instanceof Cell c) {
-                    if (dummy_grid[c.y()][c.x()]) {
+                    if ((c.x()>=0 && c.y()>=0)&&dummy_grid[c.y()][c.x()]) {
                         living_neighbour_cells.add(c);
-                    } else {
+                    } else if (c.x()>=0 && c.y()>=0){
                         dead_neighbour_cells.add(c);
                     }
                 }
@@ -210,18 +219,26 @@ public class Game implements CheckMovement {
     }
 
     int resolve_limit_of_x(int x) {
-        if (x < 0)
+        if (x < 0 && grid_nature.equals(GridNature.OPEN))
             return this.column - 1;
-        if (x > this.column - 1)
+        if (x < 0 && grid_nature.equals(GridNature.CLOSED))
+            return -1;
+        if (x > this.column - 1 && grid_nature.equals(GridNature.OPEN))
             return 0;
+        if (x > this.column - 1 && grid_nature.equals(GridNature.CLOSED))
+            return -1;
         return x;
     }
 
     int resolve_limit_of_y(int y) {
-        if (y < 0)
+        if (y < 0 && grid_nature.equals(GridNature.OPEN))
             return this.row - 1;
-        if (y > this.row - 1)
+        if (y < 0 && grid_nature.equals(GridNature.CLOSED))
+            return -1;
+        if (y > this.row - 1 && grid_nature.equals(GridNature.OPEN))
             return 0;
+        if (y > this.row - 1 && grid_nature.equals(GridNature.CLOSED))
+            return -1;
         return y;
     }
 }
