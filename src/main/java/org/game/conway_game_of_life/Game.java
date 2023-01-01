@@ -20,11 +20,12 @@ public class Game implements CheckMovement {
     private final String _color;
     private final GameMode game_Game_mode;
     private final GridNature grid_nature;
+
     public Game(int column, int row, int size, Colors color, GameMode game_Game_mode, GridNature grid_nature) {
         this.column = column;
         this.row = row;
         this.size = size;
-        this.grid_nature=grid_nature;
+        this.grid_nature = grid_nature;
         this.game_Game_mode = game_Game_mode;
         _color = Text.getColorText("██", color);
         dummy_grid = new boolean[row][column];
@@ -34,7 +35,7 @@ public class Game implements CheckMovement {
         this.column = column;
         this.row = row;
         this.size = size;
-        grid_nature=GridNature.OPEN;
+        grid_nature = GridNature.OPEN;
         game_Game_mode = GameMode.GRID_FREE;
         _color = Text.getColorText("██", Colors.values()[new Random().nextInt(8)]);
         dummy_grid = new boolean[row][column];
@@ -133,9 +134,9 @@ public class Game implements CheckMovement {
             try {
                 var result = function.invoke(this, x, y);
                 if (result instanceof Cell c) {
-                    if ((c.x()>=0 && c.y()>=0)&&dummy_grid[c.y()][c.x()]) {
+                    if ((c.x() >= 0 && c.y() >= 0) && dummy_grid[c.y()][c.x()]) {
                         living_neighbour_cells.add(c);
-                    } else if (c.x()>=0 && c.y()>=0){
+                    } else if (c.x() >= 0 && c.y() >= 0) {
                         dead_neighbour_cells.add(c);
                     }
                 }
@@ -172,7 +173,7 @@ public class Game implements CheckMovement {
         StringBuilder grid = new StringBuilder();
         for (int i = 0; i < row * size; i++) {
             for (int j = 0; j < column * size; j++)
-                grid.append(dummy_grid[i / (size)][j / (size)] ? _color: "  ");
+                grid.append(dummy_grid[i / (size)][j / (size)] ? _color : "  ");
             grid.append('\n');
         }
         System.out.println(grid);

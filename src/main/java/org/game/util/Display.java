@@ -16,6 +16,7 @@ public class Display {
         }
     }
     public void clear_display(){
+        //System.out.println("\033[H\033[J");
         terminal.puts(InfoCmp.Capability.clear_screen);
     }
 }
