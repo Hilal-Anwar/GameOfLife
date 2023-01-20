@@ -148,6 +148,7 @@ public class Game implements CheckMovement {
     }
 
 
+
     private void Draw_Grid_box() {
         String color_text = Text.getColorText("██", Colors.YELLOW);
         StringBuilder grid = new StringBuilder();
